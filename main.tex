@@ -170,11 +170,12 @@
 \author{David DeMark}
 \date{\due}
 \usepackage{fancyhdr}
+\usepackage{nameref}
 \pagestyle{fancy}
 \fancyhf{}
-\chead{Calc 1.5 Notes}
+\lhead{Calc 1.5 Notes}
 \rhead{\due}
-\lhead{David DeMark}
+\chead{\nouppercase\leftmark}
 \cfoot{\thepage}
 % %%
 %%
@@ -374,4 +375,27 @@ Combine definitions \ref{def:limat} and \ref{def:limto} in order to define what 
 \end{excs}
 \begin{excs}Show that $\dlim_{x\to 0}\frac{1}{x^2}=\infty$. 
 \end{excs}
+\subsection{Supplemental: Example from 6/15/18 meeting}
+
+\begin{example}
+	Show that $\dlim_{x\to 2}x^2=4$. 
+\end{example}
+\begin{proof}[Response]
+	We want to find some $\delta(\epsilon)$ (which we will sort of think of as a function of $\epsilon$) for \emph{any} given $\epsilon>0$ satisfying Definition \ref{def:lim}. We will find our $\delta$ by working backwards, then work forwards to show that our $\delta$ works.
+
+A key fact for us is that $f(x)=x^2$ is an \emph{increasing} function for $x>0$. We can use this! We want that $\abs{x^2-4}<\epsilon$ whenever $0<\abs{x-2}<\delta$. This first condition can be restated as $$4-\epsilon< x^2<4+\epsilon$$ and the second can be restated as $$2-\delta <x<2+\delta$$ (take some time to prove that to yourself).
+We can use the fact that $f(x)$ is increasing in the region we care about to find some $\delta$ such that for any $x>2-\delta$, $f(x)>4-\epsilon$. To find such a $\delta$, we solve the equation $(2-\delta)^2=4-\epsilon$ for $\delta$. This simplifies to $\delta^2-4\delta+\epsilon=0$, which has solutions $2\pm \sqrt{4-\epsilon}$. We take the smaller positive solution $2-\sqrt{4-\epsilon}$ (convince yourself this is really the smaller solution and that it's really positive). Now, if $\delta<2-\sqrt{4-\epsilon}$, we (because $f(x)$ is increasing!) have that $(2-\delta)^2>(2-(2-\sqrt{4-\epsilon}))^2=(\sqrt{4-\epsilon})^2=4-\epsilon$, as desired.
+
+Now let's work backwards to find a similar maximal $\delta$ on the other side. We want to find some $\delta$ such that whenever $x<2+\delta$, then $x^2<4+\epsilon$. Let's solve $(2+\delta)^2=4+\epsilon$. This simplifies to $\delta^2+4\delta-\epsilon=0$ which has solutions $-2\pm \sqrt{4+\epsilon}$. We take the only positive solution $-2+\sqrt{4+\epsilon}$. Note now that whenever $\delta<-2+\sqrt{4+\epsilon}$, we have that $(2+\delta)^2<(2+(-2+\sqrt{4+\epsilon}))^2=4+\epsilon$, as desired.
+
+To recap, we've found one positive number $2-\sqrt{4-\epsilon}$ such that when $\delta<-\sqrt{4-\epsilon}$, we have that for $x>2-\delta$, $x^2>4-\epsilon$. We've also found another positive number $-2+\sqrt{4+\epsilon}$ such that when $\delta<-2+\sqrt{4+\epsilon}$ and $x<2+\delta$, we have that $x^2<4+\epsilon$. We need both of these conditions to be true simultaneously. Thus, we let $$0<\delta< \min \{(2-\sqrt{4-\epsilon}),(-2+\sqrt{4+\epsilon})\}$$ and have indeed that both conditions can be achieved simultaneously. This completes our proof. 
+\end{proof}
+\begin{excs} Show that $\dlim_{x\to 3}x^2=9$
+
+	\end{excs}
+\begin{excs} Show that $\dlim_{x\to 3}x^2-2x+1=4$
+	
+\end{excs}
+\chapter{Polynomial Long Division, Limits II, \& Derivatives}
+
 \end{document} 
