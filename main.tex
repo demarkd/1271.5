@@ -1,4 +1,4 @@
-\documentclass[english]{article}
+\documentclass[english]{book}
 \newcommand{\G}{\overline{C_{2k-1}}}
 \usepackage[latin9]{inputenc}
 \usepackage{amsmath}
@@ -159,21 +159,22 @@
 \newtheorem{notation}[theorem]{Notation}
 \newtheorem*{notation*}{Notation}
 \newtheorem*{goal}{Goal}
+\newtheorem*{next week}{Next Week}
 \newtheorem{fact}[theorem]{Fact}
 %FINAL
-\newcommand{\due}{6 June 2018} 
+\newcommand{\due}{Summer 2018} 
 \RequirePackage{geometry}
 \geometry{margin=.7in}
 \usepackage{todonotes}
-\title{Summer Calc 1.5 Notes}
+\title{Calc 1.5 Notes}
 \author{David DeMark}
 \date{\due}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\chead{Unit 1: Euler's Formula \& Limits I}
+\chead{Calc 1.5 Notes}
 \rhead{\due}
-\lhead{MATH 1271.5}
+\lhead{David DeMark}
 \cfoot{\thepage}
 % %%
 %%
@@ -215,7 +216,7 @@
 \newcommand{\dlim}{\displaystyle\lim}
 \begin{document}
 \maketitle
-\chapter{Unit 1: Euler's Formula \& Limits I}
+\chapter{Euler's Formula \& Limits I}
 \setcounter{section}{-1}
 \section{Euler's Formula}
 \begin{goal} Use Euler's Formula (Theorem \ref{thm:eufl}) to derive any number of trig identities.
@@ -273,9 +274,18 @@ Simplify the expression $e^{i\pi}+1$
 \end{excs}
 \section{Limits I: Formal Definition \& First Properties}
 See: Stewart, \S2.4.
+\begin{goal}
+	Understand limits in terms of formal properties, prove basic facts regarding them.
+\end{goal}
+\begin{next week}
+Use these properties to do a bunch of more concrete limit computations, possibly start out derivatives.
+\end{next week}
 \begin{definition}\label{def:lim}
 	Let $f$ be a function on the real numbers, and let $a$ and $L$ be real numbers. We say $\displaystyle\lim_{x\to a}f(x)=L$ if for any real number $\epsilon>0$, there exists some real number $\delta>0$ such that if $0<\abs{x-a}<\delta$, then $\abs{f(x)-L}<\epsilon$.
 \end{definition}
+\begin{remark}
+	$\epsilon$ is the Greek letter \emph{epsilon.} $\delta$ is the Greek letter \emph{delta.}
+\end{remark}
 \begin{remark}
 Let's unpack that definition a bit. First, keep in mind that we should think of $\abs{x-a}$ as the \emph{distance} between $x$ and $a$. When we say \say{for any $\epsilon$, there exists a $\delta$,} that means that if \emph{we are given} some number $\epsilon$, then (theoretically) we can find some number $\delta$ with the property that if $x$ is \say{less than $\delta$ away from $a$,} then $f(x)$ is \say{less than $\epsilon$ away from $L$.} 
 
@@ -296,9 +306,9 @@ Now, suppose we are given some real number $\epsilon>0$. $\epsilon$ corresponds 
 	\includegraphics[scale=0.5,trim={0 4in 10mm 0},clip]{1graph3} \caption{The graph of $y=f(x)$, now with a horizontal region around $x=a$.\label{fig:1graph3}}
 \end{figure}
 
-Note that we could have chosen a different $\delta$\textemdash in particular, any smaller $\delta$ would work.
+Note that we could have chosen a different $\delta$\textemdash in particular, any smaller $\delta$ would work. Also note that we would not be done after just finding this one $\delta$\textemdash we must find such a $\delta$ for \emph{any} $\epsilon$, no matter how small\textemdash in other words, we must repeat this process infinitely many times! As that would take all day (as well as all of the other days), in practice we almost always do this abstractly (for some \emph{general} $\epsilon$) instead of case-by-case, as in Example \ref{ex:1lin}.
 \end{remark}
-\begin{exle}
+\begin{exle}\label{ex:1lin}
 	Use Definition \ref{def:lim} to show that $\displaystyle\lim_{x\to 2} 4x-3=5$.
 \end{exle}
 \begin{proof}[Response]
@@ -311,4 +321,57 @@ Note that we could have chosen a different $\delta$\textemdash in particular, an
 %	 Thus, if we let $d=\abs{x-2}$, we have that $\abs{f(x)-f(2)}=\abs{4(x-2)}=4d$.
  Now, suppose we are given some $\epsilon>0$. We need to choose a $\delta$ such that if $\abs{x-2}<\delta$, then $\abs{f(x)-f(2)}<\epsilon$. But as we just saw, as long as we pick $0<\delta<\epsilon/4$, we get that if $\abs{x-2}<\delta$, then $\abs{f(x)-f(2)}=\abs{4(x-2)}=4\abs{x-2}<4\delta<4(\epsilon/4)=\epsilon$. So indeed, $\dlim_{x\to 2}(4x-3)=5$. 
 \end{proof}
+
+\begin{excs}
+	Use the techniques of Example \ref{ex:1lin} to show that $$\lim_{x\to 3}5x-6=9$$
+\end{excs}
+\begin{excs}
+	Or if that's too boring, use the techniques of Example \ref{ex:1lin} to show that $$\lim_{x\to a}mx+b=ma+b$$. 
+\end{excs}
+\subsection{Limits at/to infinity}
+\begin{definition}\label{def:limto}
+	We say that $\dlim_{x\to a}f(x)=\infty$ if for any real number $N$, there exists a real number $\delta>0$ such that if $0<\abs{x-a}<\delta$, then $f(x)>N$. 
+\end{definition}
+\begin{remark}
+	Basically, the way this differs from \ref{def:lim} is defining \say{closeness to infinity.} That is, we say that $f$ \say{approaches infinity} when for any number $N$ (no matter how large!) there is a region surrounding $x=a$ where $f(x)>N$ (replacing the condition $\abs{f(x)-L}<\epsilon$).
+\end{remark}
+\begin{definition}\label{def:limat}
+We say that $\dlim_{x\to \infty} f(x)=L$ if for any $\epsilon>0$, there exists some real number $R$ such that for all $x>R$, $\abs{f(x)-L}<\epsilon$
+\end{definition}
+\begin{remark}
+	Once again, let's unpack this a bit. Suppose we are considering the graph of $y=f(x)$ as in figure \ref{fig:1graph4} and wish to show that $\dlim_{x\to \infty} f(x)=L$. 
+	\begin{figure}[h!]\centering
+		\includegraphics[scale=0.45,trim={0 3.3in 12mm 36mm},clip]{1graph4} \caption{The graph of $y=f(x)$ with $y=L$ drawn in.\label{fig:1graph4}}
+	\end{figure}
+
+Now suppose we are once again given some $\epsilon>0$. In Figure \ref{fig:1graph5}, we draw in the region on the $y$-axis of all points $y$ with $\abs{y-L}<\epsilon$ in red.
+\begin{figure}[h!]\centering
+	\includegraphics[scale=0.5,trim={0 3.3in 12mm 36mm},clip]{1graph5} \caption{The graph of $y=f(x)$ with $y=L$ and the surrounding region of radius $\epsilon$ drawn in.\label{fig:1graph5}}
+\end{figure}
+\newpage
+We need to find some $R$ such that for all $x$ to the right of $R$, the graph of the function stays within the two red lines. However, we may indeed find such an $R$ (assuming the function isn't too badly behaved to the right of our frame). This $R$ is inserted in figure \ref{fig:1graph6}.
+
+\begin{figure}[h!]\centering
+	\includegraphics[scale=0.5,trim={0 3.3in 12mm 36mm},clip]{1graph6} \caption{The graph of $y=f(x)$ with $y=L$ drawn in.\label{fig:1graph6}}
+\end{figure}
+
+Of course, once more, we wouldn't actually be done once we had found this $x$-coordinate $R$\textemdash we must do so for \emph{any} possible $\epsilon$, no matter how small.
+\end{remark}
+\begin{excs}
+	Rewrite Definitions \ref{def:limto} and \ref{def:limat} replacing $\infty$ with $-\infty$ and making the appropriate other adjustments.
+\end{excs}
+\begin{excs}
+Combine definitions \ref{def:limat} and \ref{def:limto} in order to define what it means to say that $\dlim_{x\to \infty}f(x)=\infty$. (Hint: read ahead to the next example if you're having trouble). You don't have to write it out, but also convince yourself that you'd be able to do the same for $\dlim_{x\to -\infty}f(x)=\infty$, $\dlim_{x\to \infty} f(x)=-\infty$ and $\dlim_{x\to -\infty} f(x)=-\infty$.  
+\end{excs}
+\begin{exle}
+	Show that $\dlim_{x\to \infty} x=\infty$.
+\end{exle}
+\begin{proof}[Response]
+	We need to show that for any real $N$, there exists a number $R$ such that if $x>R$, then $f(x)>N$. Let $N$ be arbitrary. Let $R\geq N$. Then, for any $x>R$, $f(x)=x>R\geq N$. Thus, $\lim_{x\to \infty}x=\infty$. 
+\end{proof}
+\begin{excs}
+	Show that $\dlim_{x\to \infty} \frac{1}{x}=0$. 
+\end{excs}
+\begin{excs}Show that $\dlim_{x\to 0}\frac{1}{x^2}=\infty$. 
+\end{excs}
 \end{document} 
