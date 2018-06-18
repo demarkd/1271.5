@@ -397,5 +397,39 @@ To recap, we've found one positive number $2-\sqrt{4-\epsilon}$ such that when $
 	
 \end{excs}
 \chapter{Polynomial Long Division, Limits II, \& Derivatives}
+\setcounter{section}{-1}
+\section{Polynomial Long Division}
+\begin{theorem}
+	Let $f(x)$ and $g(x)$ be polynomials with coefficients in $\RR$ (the real numbers) or $\QQ$ (the rational numbers), and let $\deg f(x)\geq \deg g(x)$. Then, there exist polynomials  $q(x)$, $r(x)$ such that $$f(x)=q(x)g(x)+r(x)$$ where $\deg r(x)<\deg g(x)$. 
+ \end{theorem}
+Rather than prove this theorem (well, I suppose it's a proof of sorts), let's dive straight in to how to find $q(x)$ and $r(x)$.
 
+We work from the following framework. At the $i$th step of our process, we write
+\begin{equation}f(x)=q_i(x)g(x)+r_i(x).\label{PLDsetup}\end{equation}
+We will iteratively define $q_i$ and $r_i$ until we get an $r_i$ with degree strictly less than that of $g$. Set $q_0(x)=0$ and set $r_0(x)=f(x)$ (check that equation \eqref{PLDsetup} is actually satisfied by these!). We suppose $\deg g(x)=m$ and $\deg r_i(x)=n$ with $n\geq m$. Write $g(x)=a_mx^m+\dots$ and $r_i(x)=b_nx^n+\dots$. Then, set $q_{i+1}(x)=q_{i}(x)+\frac{b_n}{a_m}x^{n-m}$ and set $r_{i+1}(x)=r_i(x)-\frac{b_n}{a_m}x^{n-m}g(x)$. If $\deg r_{i+1}(x)<\deg g(x)$, we are done and can let $q(x)=q_{i+1}(x)$ and $r(x)=r_{i+1}(x)$. Otherwise, go back to the top and find $q_{i+2}$ and $r_{i+2}$.
+\begin{exle}
+Let $f(x)=x^7-3x^5+x^4-x+7$ and $g(x)=x^2-3x+1$. Write $f(x)=q(x)g(x)+r(x)$ with $\deg r(x)<\deg g(x)=2$. 
+\end{exle}\begin{proof}[Response]
+We begin with $r_0(x)=f(x)=x^7-3x^5+x^4-x+7$ and $q_0(x)=0$. Here, $m=2$ and $n=7$, with our $a_m=b_n=1$. Thus, our new $q_1(x)$ is $x^{n-m}=x^5$. We then compute that $x^5g(x)=x^7-3x^6+x^5$, and so $r_1(x)=r_0(x)-x^5g(x)=x^7-3x^5+x^4-x+7-(x^7-3x^6+x^5)=3x^6-4x^5+x^4-x+7$.
+
+Now, $m=2$ still and $n=6$, with our new $a_m=3$. Thus, $q_2(x)=q_1(x)+3x^{6-2}=x^5+3x^4$, and $r_2(x)=r_1(x)-3x^4g(x)=5x^5-2x^4-x+7$.
+
+
+We continue the process and find:
+\begin{align*}
+	q_3(x)=x^5+3x^4+5x^3&&r_3(x)=13 x^4- 5 x^3 -x+7\\
+	q_4(x)=x^5+3x^4+5x^3+13x^2&&r_4(x)=34 x^3-13 x^2-x+7\\
+	q_5(x)=x^5+3x^4+5x^3+13x^2+34x&&r_5(x)=89x^2-35x+7\\
+	q_6(x)=x^5+3x^4+5x^3+13x^2+34x+89&&r_6(x)=232x-82
+\end{align*}
+We finally have that $r_6(x)$ has a lower degree than $g$! Thus, we have our $q$ and our $r$ and may write
+$$f(x)=(x^5+3x^4+5x^3+13x^2+34x+89)g(x)+(232x-82)$$\end{proof}
+\begin{exle}
+	Write $f(x)/g(x)$ in the form of a polynomial plus a rational function with the rational function's numerator having a lesser degree than the denominator.
+\end{exle}
+\begin{proof}[Response]
+	We have that $$\frac{f(x)}{g(x)}=\frac{x^7-3x^5+x^4-x+7}{x^2-3x+1}=\frac{(x^5+3x^4+5x^3+13x^2+34x+89)(x^2-3x+1)+(232x-82)}{x^2-3x+1}$$
+	We may separate out the second fraction and cancel like terms:
+\begin{align*}\frac{f(x)}{g(x)}&=	\frac{(x^5+3x^4+5x^3+13x^2+34x+89)(x^2-3x+1)}{x^2-3x+1}+\frac{232x-82}{x^2-3x+1}\\&=x^5+3x^4+5x^3+13x^2+34x+89+\frac{232x-82}{x^2-3x+1}\end{align*}
+\end{proof}
 \end{document} 
