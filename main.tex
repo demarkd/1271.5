@@ -432,4 +432,40 @@ $$f(x)=(x^5+3x^4+5x^3+13x^2+34x+89)g(x)+(232x-82)$$\end{proof}
 	We may separate out the second fraction and cancel like terms:
 \begin{align*}\frac{f(x)}{g(x)}&=	\frac{(x^5+3x^4+5x^3+13x^2+34x+89)(x^2-3x+1)}{x^2-3x+1}+\frac{232x-82}{x^2-3x+1}\\&=x^5+3x^4+5x^3+13x^2+34x+89+\frac{232x-82}{x^2-3x+1}\end{align*}
 \end{proof}
+\begin{excs}
+	Given $f$ and $g$ write $f$ in the form $q(x)g(x)+r(x)$ where $\deg r(x)<\deg g(x)$.
+	\begin{enumerate}[label=\alph*)]
+		\item $f(x)=x^3-2x^2+1,$ $g(x)=x-2$
+		\item $f(x)=x^3-5x^2+8x-4$, $g(x)=x-1$
+		\item $f(x)=5x^5-4x^4+3x^3-2x^2+x-1$,  $g(x)=x^3+2x-1$
+		
+	\end{enumerate}
+\end{excs}
+\begin{excs}
+	Write each of the following rational functions in the form of a polynomial plus a rational function with the rational function's numerator having a lesser degree than the denominator.
+	\begin{enumerate}[label=\alph*)]
+		\item $\dfrac{x^2-2x+1}{x^2+2x+1}$
+		\item $\dfrac{x^3}{x-2}$
+		\item $\dfrac{x^4-2x+6}{x^2-2}$
+	\end{enumerate}
+\end{excs}
+\section{Limits II, Continuity \& Derivatives}
+\begin{theorem}
+	For $a\in \RR$ or $a=\pm \infty$, the following hold provided $\dlim_{x\to a}f(x)\neq \pm \infty$, $\dlim_{x\to a} g(x)$ exist and are not $\pm \infty$. 
+	\begin{enumerate}[label=(\alph*)]\label{limlinetc}
+\item $\dlim_{x\to a}cf(x)=c\left(\dlim_{x\to a}f(x)\right)$ for all $c\in \RR$. 
+\item $\dlim_{x\to a}\left(f(x)+g(x)\right)=\left(\dlim_{x\to a}f(x)\right)+\left(\dlim_{x\to a}g(x)\right)$
+\item $\dlim_{x\to a} \left(f(x)g(x)\right)=\left(\dlim_{x\to a}f(x)\right)\left(\dlim_{x\to a}g(x)\right)$
+\item $\dlim_{x\to a}\dfrac{f(x)}{g(x)}=\dfrac{\dlim_{x\to a} f(x)}{\dlim_{x\to a}g(x)}$ provided $\dlim_{x\to a}g(x)\neq 0$.
+	\end{enumerate}\end{theorem}
+\begin{excs}
+	Prove part (a) of Theorem \ref{limlinetc}.
+\end{excs}
+\begin{excs}
+Prove part (b) of Theorem \ref{limlinetc}.
+\end{excs}
+\begin{proof}[Proof of Theorem \ref{limlinetc} (c)]
+	We let $L_f=\dlim_{x\to a}f(x)$ and $L_g=\dlim_{x\to a}g(x)$.
+\end{proof}
+
 \end{document} 
