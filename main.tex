@@ -90,8 +90,9 @@
 %\newcommand{\prob}[1]{\setcounter{section}{#1-1}\section{}}
 %\newcommand{\prt}[1]{\setcounter{subsection}{#1-1}\subsection{}}
 %\newcommand{\pprt}[1]{{\textit{{#1}.)}}\newline}
-%\renewcommand\thesubsection{\alph{subsection}}
+
 \usepackage[]{titlesec}
+\usepackage{etoolbox}
 %\titlelabel{\thetitle.)\quad}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 \makeatletter
@@ -125,7 +126,7 @@
 %\titlelabel{(\thesubsection)}
 %\titlelabel{(\thesubsection)\quad}
 \usepackage{listings}
-\lstloadlanguages{[5.2]Mathematica}
+%\lstloadlanguages{[5.2]Mathematica}
 \usepackage{babel}
 \newcommand{\ffac}[2]{{(#1)}^{\underline{#2}}}
 \usepackage{color}
@@ -152,9 +153,9 @@
 \newtheorem{caution}{Caution}[theorem]
 
 \theoremstyle{definition}
-\newtheorem{excs}{Exercise}
+\newtheorem{excs}{Exercise}[chapter]
 \newtheorem{hint}{Hint}[excs]
-\newtheorem{prbm}[excs]{Problem}
+%\newtheorem{prbm}[excs]{Problem}
 \newtheorem{exle}[theorem]{Example}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{notation}[theorem]{Notation}
@@ -163,6 +164,7 @@
 \newtheorem*{next week}{Next Week}
 \newtheorem{fact}[theorem]{Fact}
 \newtheorem{fifact}[theorem]{Foundationally Important Fact}
+\renewcommand{\theexcs}{\arabic{chapter}.\Alph{excs}}
 %FINAL
 \newcommand{\due}{Summer 2018} 
 \RequirePackage{geometry}
@@ -400,7 +402,7 @@ To recap, we've found one positive number $2-\sqrt{4-\epsilon}$ such that when $
 \end{excs}
 \chapter{Polynomial Long Division \& Limits II}
 \setcounter{section}{-1}
-Before we begin, a warm-up exercise (stolen from Stephen Abbott's \emph{Understanding Analysis}).
+Before we begin, a warm-up exercise to get you thinking (stolen from Stephen Abbott's \emph{Understanding Analysis}).
 \begin{excs}
 Describe what we would have to demonstrate in order to disprove each of the following statements.\begin{enumerate}
 
@@ -460,7 +462,7 @@ $$f(x)=(x^5+3x^4+5x^3+13x^2+34x+89)g(x)+(232x-82)$$\end{proof}
 		\item $\dfrac{x^4-2x+6}{x^2-2}$
 	\end{enumerate}
 \end{excs}
-\section{Limits II: More Limit Laws, Limits of Sequences, and Continuity}
+\section{Limits II: More Limit Laws \& Limits of Sequences}
 \subsection{More Limit Laws}The following fact is extremely important in all types of mathematical analysis
 \begin{fifact}\label{trident}
 The \emph{triangle identity} states that for any $a,b \in \RR$, $\abs{a+b}\leq \abs{a}+\abs{b}$.
@@ -468,6 +470,17 @@ The \emph{triangle identity} states that for any $a,b \in \RR$, $\abs{a+b}\leq \
 \begin{excs}
 	Come up with an explanation for the name \say{triangle identity}\textemdash it may help to recall how we measure distance in the real numbers.
 \end{excs}
+Before we begin the real content for this section, we have one more very important fact from last time that we should make sure to acknowledge.
+\begin{fact}\label{fact:limxneq a} Let $a \neq \pm \infty$ be a real number. 
+	If $f(x)=g(x)$ whenever $x\neq a$ and $\dlim_{x\to a}f(x)=L$, then $\dlim_{x\to a}g(x)=L$ (even if $g(a)\neq f(a)$ or even doesn't exist)!
+\end{fact}
+\begin{excs}
+	Use Definition \ref{def:lim} to show fact \ref{fact:limxneq a}.
+\end{excs}
+\begin{hint}
+	The key phrase of Definition \ref{def:lim} here is
+	\end{hint}
+
 \begin{theorem}
 	For $a\in \RR$ or $a=\pm \infty$, the following hold provided $\dlim_{x\to a}f(x)$, $\dlim_{x\to a} g(x)$ exist and are not $\pm \infty$. 
 	\begin{enumerate}[label=(\alph*)]\label{limlinetc}
@@ -498,13 +511,24 @@ Theorem \ref{limlinetc} allows us to compute many limits we may previously have 
 
 We now recall the definition of continuity
 \begin{definition}
-	We say that \emph{$f(x)$ is continuous at $x=a$} if $\lim_{x\to a}f(x)=f(a)$.
+	We say that \emph{$f(x)$ is continuous at $x=a$} if $\dlim_{x\to a}f(x)=f(a)$.
 \end{definition}
 Now, exercise \ref{polycont} implies the following fact:
 \begin{corollary}
 	Polynomials are continuous.
 \end{corollary}
-
+Now, we'll give an example to demonstrate the utility of polynomial long division.
+\begin{exle}\label{exle:pldlim}
+	Find $\dlim_{x\to 7} \frac{x^3-9x^2+15x-7}{x-7}$ (without using L'H\^opital's rule!)
+\end{exle}
+\begin{proof}[Response]
+We use polynomial long division with $m=1$ and $n=3$. We set $r_0(x)=x^3-9x^2+15x-7$ and $q_0(x)=0$ with $g(x)=x-7$. Then, we find $q_1(x)=x^2$ and $r_1(x)=-2x^2+15x-7$. Next, we calculate $q_2(x)=x^2-2x$ and $r_2(x)=x-7$. Finally, we find $q_3(x)=x^3-2x+1$ with $r_3(x)=0$. Thus, for $x\neq 7$, we have $\frac{x^3-9x^2+15x-7}{x-7}=x^2-2x+1$, and thus $\dlim_{x\to 7}\frac{x^3-9x^2+15x-7}{x-7}=\dlim_{x\to 7}x^2-2x+1$ (by fact \ref{fact:limxneq a}). As $x^2-2x+1$ is a polynomial and thus continuous, we have $\dlim_{x\to 7}\frac{x^3-9x^2+15x-7}{x-7}=7^2-2*7+1=36$.
+\end{proof}
+\begin{excs}
+	Find the following limits using polynomial long division.\begin{enumerate}[label=\textit{(\alph*)}]
+\item\todo[inline]{come up with a couple limits}
+	\end{enumerate}
+\end{excs}
 Next, we'll show one of our key tools in proving limits, in the form of a few exercises.
 \begin{lemma}[Squeeze Theorem: Prelude]\label{lem:presqz}
 	If there exists some interval $I=(b,c)$ with $b<a<c$ such that $f(x)\geq g(x)$ on $I$, then if $L_f=\dlim_{x\to a}f(x)$ and $L_g=\dlim_{x\to a}g(x)$ exist, we have that $L_f\geq L_g$.
@@ -523,12 +547,27 @@ The proof should come down to \say{choosing the right $\epsilon$.}
 \end{hint}
 \begin{excs}\label{excs:sqz}
 	Show the following result using Exercise \ref{excs:presqz} and Definition
-	\begin{corollary}[Squeeze Theorem, final version]
+	\begin{corollary}[Squeeze Theorem, final version]\label{cor:finalsqz}
 		We suppose there is some interval $I=(b,c)$ with $b<a<c$ such that $f(x)\geq g(x)\geq h(x)$ for all $x\in I$. Then, if $\lim_{x\to a}f(x)=L=\lim_{x\to a}h(x)$, we have that $\lim_{x\to a}g(x)$ exists and $\lim_{x\to a}g(x)=L$.
 	\end{corollary}
 \begin{hint}
 Try assuming first that $\lim_{x\to a}g(x)$ exists, and then show that it's equal to $L$. The hard part is showing that it exists.
 \end{hint}\end{excs}
+We now give two very useful (for the below) facts without proof.
+\begin{fact}
+	If $f(x)$ is a continuous function and $\dlim_{x\to a}g(x)=L$, then $\dlim_{x\to a}f(g(x))=f(L)$.
+\end{fact}
+\begin{fact}
+	The following are continuous (everywhere, unless otherwise stated): polynomials, rational functions (where the denominator is nonzero), $e^x$, $\ln(x)$ (on the interval $(0,+\infty)$), $\sin(x)$, $\cos(x)$. 
+\end{fact}
+\begin{excs}
+	Use the squeeze theorem to compute the following limits. Be sure to justify each step and show any new limits you may need to show. \begin{enumerate}[label=\textit{(\alph*)}]
+		\item $\dlim_{x\to 0}{x\sin(1/x)}$
+		\item $\dlim_{x\to \infty} \frac{\cos(x)}{x}$
+		\item $\dlim_{x\to 0} e^{\sin(x)\sin(1/x)}$
+		
+	\end{enumerate}
+\end{excs}
 %\todo[inline]{Insert more limit exercises, maybe one or two more theorems}
 \subsection{Limits of Sequences}
 See: Stewart, \S 11.1.
@@ -543,9 +582,29 @@ As the chapter heading has probably tipped you off to, we can take limits of seq
 	For $L\neq \pm \infty$, we say that $\{x_n\}$ has a limit at $L$ (usually denoted $\dlim_{n\to\infty}x_n=L$ or $x_n\to L$ as $n\to \infty$ or simply $x_n\to L$) if for any $\epsilon>0$, there is some $N$ such that for any $m>N$, $\abs{x_m-L}<\epsilon$. We say that $\dlim_{n\to \infty}x_n=\infty$ if for any real number $R$ there is some $N$ such that for any $m>N$, $x_m>R$.
 	\end{definition}
 Be sure to compare Definition \ref{def:seqlim} to Definitions \ref{def:limat} and \ref{def:limto}!!
+\begin{excs}[Special case of the Squeeze Theorem for sequences]\label{excs:sqzseq1}
+	Let ${x_n}$ be a sequence. Suppose $\{y_n\}$ is a sequence with $y_n\geq 0$ for each $n$ and $\abs{x_n}\leq y_n$ for each $n$. Suppose $y_n\to 0$. Show that then, $x_n\to 0$ as well.
+\end{excs}
 
 
 
+\begin{excs}[Squeeze Theorem for sequences: prelude]\label{excs:sqzseq2}
+Rewrite Lemma \ref{lem:presqz} to adapt it to sequences (rather than functions). Then, prove your rewritten statement.
+\begin{hint}
+	It only really makes sense to consider $\dlim_{n\to a}x_n$ if $a=+\infty$. 
+\end{hint}	
+\end{excs}
+\begin{excs}\label{excs:sqzseq3}
+	Do the same for Corollary \ref{cor:finalsqz}.
+\end{excs}
+
+\begin{excs}\label{excs:funseq}
+	Let $f(x)$ be a function with $\dlim_{x\to \infty}f(x)=L$. Let $x_n=f(n)$. Show that $x_n\to L$ as well.
+\end{excs}
+
+\begin{excs}
+	Let $x_n= \frac{(-1)^n\sin(n^2)}{n}$. Use either Exercise \ref{excs:sqzseq1}, Exercises \ref{excs:sqzseq2} and \ref{excs:sqzseq3} or Exercise \ref{excs:funseq} to show that $\dlim_{n\to \infty}x_n=0$
+\end{excs}
 %We now recall the definition of continuity
 %\begin{definition}
 %	We say that \emph{$f(x)$ is continuous at $x=a$} if $\lim_{x\to a}f(x)=f(a)$.
