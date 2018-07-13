@@ -526,7 +526,11 @@ We use polynomial long division with $m=1$ and $n=3$. We set $r_0(x)=x^3-9x^2+15
 \end{proof}
 \begin{excs}
 	Find the following limits using polynomial long division.\begin{enumerate}[label=\textit{(\alph*)}]
-\item\todo[inline]{come up with a couple limits}
+\item$\dlim_{x\to 7}\frac{x^3-7x^2-x+7}{(x-7)}$
+\item$\dlim_{x\to \sqrt{2}}\frac{x^6-4x^4+5x^2-2}{x^2-2}$
+\item For $k\geq 1$, $\dlim_{t\to 1}\frac{t^k-1}{t-1} $
+\item $\dlim_{x\to 3}\frac{-2x^2+12x-18+1}{(x-3)^2}$
+\item $\dlim_{x\to 5}\frac{x^3-4x^2-5x}{x-6}$
 	\end{enumerate}
 \end{excs}
 Next, we'll show one of our key tools in proving limits, in the form of a few exercises.
@@ -604,6 +608,10 @@ Rewrite Lemma \ref{lem:presqz} to adapt it to sequences (rather than functions).
 
 \begin{excs}
 	Let $x_n= \frac{(-1)^n\sin(n^2)}{n}$. Use either Exercise \ref{excs:sqzseq1}, Exercises \ref{excs:sqzseq2} and \ref{excs:sqzseq3} or Exercise \ref{excs:funseq} to show that $\dlim_{n\to \infty}x_n=0$
+\end{excs}
+
+\begin{excs}[Challenge problem?]
+	Let $\{x_n\}$ a sequence with $x_n\to L$ where $0<L<\infty$, and suppose $x_n\neq 0$ for all $n$. Let $y_n=\frac{x_n}{x_{n-1}}$. Show that $\dlim_{n\to \infty}y_n=1$. 
 \end{excs}
 %We now recall the definition of continuity
 %\begin{definition}
